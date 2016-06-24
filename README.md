@@ -2,6 +2,13 @@
 
 Create a mock server using a json file.
 
+##Installation
+
+To install you need to have NodeJS and NPM installed on your system [https://nodejs.org/en/](https://nodejs.org/en/)
+Install the mock-json-server package by running `npm install -g mock-json-server`
+
+**Thats it!**
+
 ## Example
 
 To run the server run: `mock-json-server data.json` This starts a server on http://localhost:8000/
