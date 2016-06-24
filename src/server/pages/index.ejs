@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <style>
+            .well{
+                border-radius: 0;
+                box-shadow: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>JSON API Service</h2>
+            <div>
+                <% _.each(database, function(data, path){ %>
+                <div class="well">
+                    <a style="display: inline;" href="http://localhost:<%= port %><%= path %>">http://localhost:<%= port %><%= path %></a>
+                    <div class="methods" style="display: inline;">
+                        <% _.each(data, function(d, method){ %>
+                        <span class="label label-primary"><%= method %></span>
+                        <% }); %>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </body>
+</html>
