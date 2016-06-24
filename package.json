@@ -1,8 +1,9 @@
 {
   "name": "mock-json-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Mock JSON Server",
-  "main": "src/js/server.js",
+  "main": "./src/server/index.js",
+  "bin": "./bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin"
