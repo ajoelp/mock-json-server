@@ -4,15 +4,22 @@ var cors = require('cors');
 var enableDestroy = require('server-destroy');
 var fs = require('fs');
 var chalk = require('chalk');
+var moment = require('moment');
 
 var server = null;
 
 var app = express();
 var methods = ['get', 'post', 'put', 'delete'];
 
+function logger(req, res, next){
+  console.log(moment.utc().format() + " : " + chalk.yellow("["+req.method+"] " + req.url));
+  next();
+}
+
 function _start(source, port){
   app = express();
   app.use(cors());
+  app.use(logger);
   app.locals = {
     _ : _
   };
