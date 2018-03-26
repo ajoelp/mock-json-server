@@ -1,13 +1,15 @@
-var path = require('path');
-var fs = require('fs');
-var server = require('../server');
+const path = require('path');
+const fs = require('fs');
+const chokidar = require('chokidar');
+const server = require('../server');
 
-module.exports = function (argv) {
-  var source = argv._[0];
-  var app = server(source, argv.port);
-  fs.watchFile(source, function(){
-    var app = server(source, argv.port);
+module.exports = (argv) => {
+  const source = argv._[0];
+  const app = server(source, argv.port);
+  const watcher = chokidar.watch(source);
+  watcher.on('change', () => {
+    const app = server(source, argv.port);
     app.reload()
-  });
+  })
   app.start();
 };
