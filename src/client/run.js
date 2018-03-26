@@ -5,8 +5,7 @@ var server = require('../server');
 module.exports = function (argv) {
   var source = argv._[0];
   var app = server(source, argv.port);
-
-  fs.watch(source, function(){
+  fs.watchFile(source, function(){
     var app = server(source, argv.port);
     app.reload()
   });
