@@ -10,6 +10,22 @@
     "start": "node ./bin"
   },
   "author": "Joel Podrebarac <joelpodrebar@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajoelp/mock-json-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ajoelp/mock-json-server/issues"
+  },
+  "keywords": [
+    "JSON",
+    "mock",
+    "server",
+    "reload",
+    "express",
+    "mock-json-server"
+  ],
+  "homepage": "https://github.com/ajoelp/mock-json-server",
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.1",
