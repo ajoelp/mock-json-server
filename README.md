@@ -91,3 +91,38 @@ services:
     ports:
       - 8000:8000
 ```
+
+
+## Running Programmatically
+
+```js
+const server = require('mock-json-server');
+const app = server({
+  "/home": {
+    "get": {
+      "data": [{ "id": 1, "name": "Steve" }]
+    },
+    "post": {
+      "data": [{ "id": 1, "name": "Steve French" }]
+    }
+  },
+  "/test/:id": {
+    "get": {
+      "data": [{ "id": 1, "name": "Steve" }]
+    },
+    "post": {
+      "data": [{ "id": 1, "name": "Steve French" }]
+    }
+  }
+}, 8000); // Start the server with a JSON object;
+
+
+// Start the server;
+app.start();
+
+// Reload the server with new data;
+app.reload({ test : true });
+
+// Stop the server
+app.stop();
+```
