@@ -1,13 +1,13 @@
-const chokidar = require('chokidar');
-const server = require('../server');
+const chokidar = require("chokidar");
+const server = require("../server");
 
-module.exports = (argv) => {
+module.exports = argv => {
   const source = argv._[0];
   const app = server(source, argv.port);
   const watcher = chokidar.watch(source);
-  watcher.on('change', () => {
+  watcher.on("change", () => {
     const app = server(source, argv.port);
-    app.reload()
-  })
+    app.reload();
+  });
   app.start();
 };
