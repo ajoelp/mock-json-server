@@ -53,3 +53,40 @@ A Post Request to http://localhost:8000/home will return.
         ]
     }
 ```
+
+
+## Docker
+
+Mock json server is also a docker image. Run it with the command 
+```bash
+docker run --name mock-json-server -v $(pwd)/test/data.json:/usr/src/app/data.json -p 8000:8000 ajoelpod/mock-json-server
+```
+
+
+### Changing the port
+
+Run the same command as above but with the `PORT` environment variable. Also change the -p to be equal to your new port.
+```bash
+docker run --name mock-json-server --env PORT=3000 -v $(pwd)/test/data.json:/usr/src/app/data.json -p 3000:3000 ajoelpod/mock-json-server
+```
+
+**or**
+
+Just change the forwared ports
+```bash
+docker run --name mock-json-server -v $(pwd)/test/data.json:/usr/src/app/data.json -p 3000:8000 ajoelpod/mock-json-server
+```
+
+### Docker Compose
+
+Example.
+```yml
+version: '3'
+services:
+  mock-json:
+    image: 'ajoelpod/mock-json-server:local'
+    volumes:
+      - ./test/data.json:/usr/src/app/data.json
+    ports:
+      - 8000:8000
+```
