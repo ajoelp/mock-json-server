@@ -84,7 +84,7 @@ Example.
 version: '3'
 services:
   mock-json:
-    image: 'ajoelpod/mock-json-server:local'
+    image: 'ajoelpod/mock-json-server'
     volumes:
       - ./test/data.json:/usr/src/app/data.json
     ports:
