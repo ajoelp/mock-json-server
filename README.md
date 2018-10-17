@@ -1,5 +1,6 @@
 # Mock Json Server
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Build Status](https://jenkins.joelpodrebarac.me/buildStatus/icon?job=Mock-JSON-Server/master)](https://jenkins.joelpodrebarac.me/job/Mock-JSON-Server/job/master/)
 
 Create a mock server using a json file.
 
