@@ -28,3 +28,9 @@ test("ensure that post works", async () => {
   expect(data.status).toBe(200);
   expect(data.data).toEqual(testData["/home"]["post"]);
 });
+
+test("ensure that params work", async () => {
+  const data = await axios.get("http://localhost:8000/test/12");
+  expect(data.status).toBe(200);
+  expect(data.data).toEqual(testData["/test/:id"]["get"]);
+});
