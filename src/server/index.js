@@ -1,54 +1,69 @@
-var express = require('express');
-var _ = require('lodash');
-var cors = require('cors');
-var enableDestroy = require('server-destroy');
-var fs = require('fs');
-var chalk = require('chalk');
-var moment = require('moment');
+const express = require('express');
+const _ = require('lodash');
+const cors = require('cors');
+const enableDestroy = require('server-destroy');
+const fs = require('fs-extra');
+const chalk = require('chalk');
+const moment = require('moment');
 
-var server = null;
+let server = null;
+let app = null;
 
-var app = express();
-var methods = ['get', 'post', 'put', 'delete'];
+const methods = ['get', 'post', 'put', 'delete'];
+const isDebug = process.env.DEBUG || false;
 
-function logger(req, res, next){
-  console.log(moment.utc().format() + " : " + chalk.yellow("["+req.method+"] " + req.url));
+function logger(req, res, next) {
+  console.log(
+    moment.utc().format() +
+      ' : ' +
+      chalk.yellow('[' + req.method + '] ' + req.url)
+  );
   next();
 }
 
-function _start(source, port){
+const start = async (source, port) => {
   app = express();
   app.use(cors());
   app.use(logger);
   app.locals = {
-    _ : _
+    _: _
   };
   app.set('views', __dirname + '/pages');
   app.set('view engine', 'ejs');
-  _makeRoutes(_getSource(source));
-  _makeHome(port, _getSource(source));
-}
+  const sources = await getSource(source);
+  _makeRoutes(sources);
+  _makeHome(port, sources);
+};
 
-function _getSource(source){
-  return JSON.parse(fs.readFileSync(source, 'utf-8'));
-}
+const getSource = async source => {
+  try {
+    const data = await fs.readFile(source, 'utf-8');
+    return JSON.parse(data);
+  } catch (e) {
+    console.error(chalk.red(`Could not read source file.\n${e.message}`));
+    if (isDebug) {
+      console.log(e);
+    }
+    process.exit(1);
+  }
+};
 
-function _listen(port, callback){
-  server = app.listen(port, function(){
+const listen = (port, callback) => {
+  server = app.listen(port, function() {
     callback();
   });
   enableDestroy(server);
-}
+};
 
-function _end(){
+const end = () => {
   server.destroy();
-}
+};
 
-function _makeRoutes(source){
-  _.each(source, function(value, path){
-    _.each(value, function(a, method){
-      if(_.includes(methods, method)){
-        app[method](path, function(req,res){
+function _makeRoutes(source) {
+  _.each(source, function(value, path) {
+    _.each(value, function(a, method) {
+      if (_.includes(methods, method)) {
+        app[method](path, function(req, res) {
           res.jsonp(a);
         });
       }
@@ -56,8 +71,8 @@ function _makeRoutes(source){
   });
 }
 
-function _makeHome(port, source){
-  app.get('/', function (req, res) {
+function _makeHome(port, source) {
+  app.get('/', function(req, res) {
     res.render('index', {
       port: port,
       database: source
@@ -65,22 +80,40 @@ function _makeHome(port, source){
   });
 }
 
-module.exports = function(source, port){
+module.exports = function(source, port) {
   return {
-    start: function(){
-      _start(source, port);
-      _listen(port, function(){
-        console.log(chalk.green('JSON Server running at http://localhost:'+ port + '/'));
-      });
+    start: async () => {
+      try {
+        await start(source, port);
+        listen(port, function() {
+          console.log(
+            chalk.green('JSON Server running at http://localhost:' + port + '/')
+          );
+        });
+      } catch (e) {
+        console.error(chalk.red('Could not start mock server.'));
+        if (isDebug) {
+          console.log(e);
+        }
+        process.exit(1);
+      }
     },
-    reload: function(){
-      _end();
-      _start(source, port);
-      _listen(port, function(){
-        console.log(chalk.bgBlue('Reloaded Server'));
-      });
+    reload: async () => {
+      try {
+        end();
+        await start(source, port);
+        listen(port, function() {
+          console.log(
+            chalk.green('JSON Server running at http://localhost:' + port + '/')
+          );
+        });
+      } catch (e) {
+        console.error(chalk.red('There was an error reloading the app.'));
+        if (isDebug) {
+          console.log(e);
+        }
+        process.exit(1);
+      }
     }
-  }
+  };
 };
-
-
