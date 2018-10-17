@@ -35,7 +35,6 @@ test("ensure that params work", async () => {
   expect(data.data).toEqual(testData["/test/:id"]["get"]);
 });
 
-
 test("ensure that reload works", async () => {
   testData["/home"]["post"] = { test: true };
   app.reload(testData);

@@ -42,10 +42,10 @@ const start = async (source, port) => {
 };
 
 const getSource = async source => {
-  if(_.isObject(source)){
-    return source
+  if (_.isObject(source)) {
+    return source;
   }
-  try { 
+  try {
     const data = await fs.readFile(source, "utf-8");
     return JSON.parse(data);
   } catch (e) {
