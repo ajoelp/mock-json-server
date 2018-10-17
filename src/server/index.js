@@ -1,22 +1,22 @@
-const express = require('express');
-const _ = require('lodash');
-const cors = require('cors');
-const enableDestroy = require('server-destroy');
-const fs = require('fs-extra');
-const chalk = require('chalk');
-const moment = require('moment');
+const express = require("express");
+const _ = require("lodash");
+const cors = require("cors");
+const enableDestroy = require("server-destroy");
+const fs = require("fs-extra");
+const chalk = require("chalk");
+const moment = require("moment");
 
 let server = null;
 let app = null;
 
-const methods = ['get', 'post', 'put', 'delete'];
+const methods = ["get", "post", "put", "delete"];
 const isDebug = process.env.DEBUG || false;
 
 function logger(req, res, next) {
   console.log(
     moment.utc().format() +
-      ' : ' +
-      chalk.yellow('[' + req.method + '] ' + req.url)
+      " : " +
+      chalk.yellow("[" + req.method + "] " + req.url)
   );
   next();
 }
@@ -28,8 +28,8 @@ const start = async (source, port) => {
   app.locals = {
     _: _
   };
-  app.set('views', __dirname + '/pages');
-  app.set('view engine', 'ejs');
+  app.set("views", __dirname + "/pages");
+  app.set("view engine", "ejs");
   const sources = await getSource(source);
   _makeRoutes(sources);
   _makeHome(port, sources);
@@ -37,7 +37,7 @@ const start = async (source, port) => {
 
 const getSource = async source => {
   try {
-    const data = await fs.readFile(source, 'utf-8');
+    const data = await fs.readFile(source, "utf-8");
     return JSON.parse(data);
   } catch (e) {
     console.error(chalk.red(`Could not read source file.\n${e.message}`));
@@ -72,8 +72,8 @@ function _makeRoutes(source) {
 }
 
 function _makeHome(port, source) {
-  app.get('/', function(req, res) {
-    res.render('index', {
+  app.get("/", function(req, res) {
+    res.render("index", {
       port: port,
       database: source
     });
@@ -87,11 +87,11 @@ module.exports = function(source, port) {
         await start(source, port);
         listen(port, function() {
           console.log(
-            chalk.green('JSON Server running at http://localhost:' + port + '/')
+            chalk.green("JSON Server running at http://localhost:" + port + "/")
           );
         });
       } catch (e) {
-        console.error(chalk.red('Could not start mock server.'));
+        console.error(chalk.red("Could not start mock server."));
         if (isDebug) {
           console.log(e);
         }
@@ -104,11 +104,11 @@ module.exports = function(source, port) {
         await start(source, port);
         listen(port, function() {
           console.log(
-            chalk.green('JSON Server running at http://localhost:' + port + '/')
+            chalk.green("JSON Server running at http://localhost:" + port + "/")
           );
         });
       } catch (e) {
-        console.error(chalk.red('There was an error reloading the app.'));
+        console.error(chalk.red("There was an error reloading the app."));
         if (isDebug) {
           console.log(e);
         }
