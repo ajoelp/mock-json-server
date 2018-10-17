@@ -6,7 +6,6 @@ docker push $image_name:$branch_name
 if [ "${branch_name}" = "master" ]; then
   docker tag $image_name:$branch_name $image_name:latest
   docker push $image_name:latest
-  docker rmi $image_name:latest
 fi
 
-docker rmi $image_name:$branch_name
+docker rmi $image_name:$branch_name --force
