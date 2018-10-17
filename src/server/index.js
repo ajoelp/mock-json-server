@@ -12,8 +12,14 @@ let app = null;
 const methods = ["get", "post", "put", "delete"];
 const isDebug = process.env.DEBUG || false;
 
+const log = data => {
+  if (!process.env.NO_OUTPUT) {
+    console.log(data);
+  }
+};
+
 function logger(req, res, next) {
-  console.log(
+  log(
     moment.utc().format() +
       " : " +
       chalk.yellow("[" + req.method + "] " + req.url)
@@ -40,7 +46,7 @@ const getSource = async source => {
     const data = await fs.readFile(source, "utf-8");
     return JSON.parse(data);
   } catch (e) {
-    console.error(chalk.red(`Could not read source file.\n${e.message}`));
+    log(chalk.red(`Could not read source file.\n${e.message}`));
     if (isDebug) {
       console.log(e);
     }
@@ -86,14 +92,15 @@ module.exports = function(source, port) {
       try {
         await start(source, port);
         listen(port, function() {
-          console.log(
+          log(
             chalk.green("JSON Server running at http://localhost:" + port + "/")
           );
+          return true;
         });
       } catch (e) {
-        console.error(chalk.red("Could not start mock server."));
+        log(chalk.red("Could not start mock server."));
         if (isDebug) {
-          console.log(e);
+          log(e);
         }
         process.exit(1);
       }
@@ -103,17 +110,20 @@ module.exports = function(source, port) {
         end();
         await start(source, port);
         listen(port, function() {
-          console.log(
+          log(
             chalk.green("JSON Server running at http://localhost:" + port + "/")
           );
         });
       } catch (e) {
-        console.error(chalk.red("There was an error reloading the app."));
+        log(chalk.red("There was an error reloading the app."));
         if (isDebug) {
-          console.log(e);
+          log(e);
         }
         process.exit(1);
       }
+    },
+    stop: () => {
+      end();
     }
   };
 };
