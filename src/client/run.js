@@ -1,5 +1,3 @@
-const path = require('path');
-const fs = require('fs');
 const chokidar = require('chokidar');
 const server = require('../server');
 

@@ -1,8 +1,8 @@
-var yargs = require('yargs');
-var pkg = require('../../package.json');
-var run = require('./run');
+const yargs = require('yargs');
+const pkg = require('../../package.json');
+const run = require('./run');
 module.exports = function () {
-  var argv = yargs
+  const argv = yargs
     .config('config')
     .usage('$0 [options] <source>')
     .options({
