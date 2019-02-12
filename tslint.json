@@ -1,0 +1,21 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+      "tslint:recommended",
+      "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "rules": {
+      "no-console": false,
+      "ordered-imports": false,
+      "object-literal-sort-keys": false
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+      "exclude": [
+          "bin",
+          "lib/*",
+          "templates"
+      ]
+  }
+}
