@@ -1,48 +1,19 @@
 {
   "name": "mock-json-server",
-  "version": "1.3.1",
-  "description": "Mock JSON Server",
-  "main": "./src/server/index.js",
-  "bin": "./bin/index.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "lint": "prettier --list-different '**/*.js'",
-    "start": "node ./bin"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Joel Podrebarac <joelpodrebar@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ajoelp/mock-json-server.git"
+    "url": "git+https://github.com/ajoelp/mock-json-server.git"
   },
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/ajoelp/mock-json-server/issues"
   },
-  "keywords": [
-    "JSON",
-    "mock",
-    "server",
-    "reload",
-    "express",
-    "mock-json-server"
-  ],
-  "homepage": "https://github.com/ajoelp/mock-json-server",
-  "license": "ISC",
-  "dependencies": {
-    "chalk": "^2.4.1",
-    "chokidar": "^2.0.4",
-    "cors": "^2.8.4",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
-    "fs-extra": "^7.0.0",
-    "lodash": "^4.17.11",
-    "moment": "^2.22.2",
-    "path": "^0.12.7",
-    "server-destroy": "^1.0.1",
-    "yargs": "^12.0.2"
-  },
-  "devDependencies": {
-    "axios": "^0.18.0",
-    "jest": "^23.6.0",
-    "prettier": "^1.14.3"
-  }
+  "homepage": "https://github.com/ajoelp/mock-json-server#readme"
 }
