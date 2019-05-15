@@ -57,8 +57,8 @@ const getSource = async source => {
   }
 };
 
-const listen = (port, callback) => {
-  server = app.listen(port, function() {
+const listen = (port, host, callback) => {
+  server = app.listen(port, host, function() {
     callback();
   });
   enableDestroy(server);
@@ -94,7 +94,7 @@ module.exports = function(source, port, host) {
     start: async () => {
       try {
         await start(source, port);
-        listen(port, function() {
+        listen(port, host, function() {
           log(
             chalk.green(`JSON Server running at http://${host}:${port}/`)
           );
@@ -112,7 +112,7 @@ module.exports = function(source, port, host) {
       try {
         end();
         await start(s, port);
-        listen(port, function() {
+        listen(port, host, function() {
           log(
             chalk.green(`JSON Server running at http://${host}:${port}/`)
           );
