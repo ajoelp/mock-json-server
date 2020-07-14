@@ -23,7 +23,7 @@ jobs:
     - name: Compile
       run: npm run compile
     - name: npm publish
-      run: npm publish --tag ${{ steps.extract_branch.outputs.branch }}
+      run: npm publish --tag next
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
     - name: Publish Docker
@@ -32,4 +32,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ajoelpod/mock-json-server
-        tags: ${{ steps.extract_branch.outputs.branch }}
+        tags: next
