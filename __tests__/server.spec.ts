@@ -13,7 +13,7 @@ describe("server", () => {
 
   it("will load the server", async () => {
     const response = await supertest(app.app).get("/");
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(200);
   });
 
   it.each(["get", "put", "post", "patch", "delete"])("will load a %s route", async method => {

@@ -2,6 +2,9 @@ import chalk from "chalk";
 
 class Log {
   log(...data: any[]) {
+    if (process.env.NODE_ENV === "test") {
+      return;
+    }
     console.log(...data);
   }
 
