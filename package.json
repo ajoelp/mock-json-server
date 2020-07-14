@@ -1,6 +1,6 @@
 {
   "name": "mock-json-server",
-  "version": "1.3.6",
+  "version": "2.0.0-beta.0",
   "description": "Mock JSON Server",
   "main": "./lib/server.js",
   "bin": "./lib/index.js",
