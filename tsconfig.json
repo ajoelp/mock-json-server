@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+      "rootDir": "./src",
+      "lib": [
+        "esnext"
+      ],
+      "outDir": "lib",
+      "noImplicitAny": false,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "declaration": true,
+      "allowJs": true,
+      "sourceMap": true,
+      "downlevelIteration": true,
+      "noUnusedLocals": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": true,
+      "alwaysStrict": true,
+      "noUnusedParameters": false,
+      "pretty": true,
+      "noFallthroughCasesInSwitch": true,
+      "allowUnreachableCode": false,
+      "target": "ES3",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "resolveJsonModule": true
+    },
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+    ]
+  }

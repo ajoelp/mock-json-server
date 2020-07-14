@@ -1,3 +1,6 @@
 .idea
 node_modules
 db.json
+.vscode
+lib
+example

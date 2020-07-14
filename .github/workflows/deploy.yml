@@ -1,0 +1,35 @@
+name: Publish Extension
+
+on:
+  create:
+    tags:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+        registry-url: 'https://registry.npmjs.org'
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+    - name: "Install Deps"
+      run: npm ci
+    - name: Compile
+      run: npm run compile
+    - name: npm publish
+      run: npm publish --tag next
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+    - name: Publish Docker
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: ajoelpod/mock-json-server
+        tags: next
