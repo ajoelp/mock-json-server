@@ -1,8 +1,8 @@
 version: '3'
 services:
   mock-json:
-    image: 'ajoelpod/mock-json-server:local'
+    build: .
     volumes:
-      - ./test/data.json:/usr/src/app/data.json
+      - ./__tests__/data.json:/usr/src/app/data.json
     ports:
       - 8000:8000
