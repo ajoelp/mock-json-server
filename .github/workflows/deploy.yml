@@ -13,12 +13,16 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
     - name: "Install Deps"
       run: npm ci
     - name: Compile
       run: npm run compile
     - name: npm publish
-      run: npm publish --tag ${GITHUB_REF##*/}
+      run: npm publish --tag ${{ steps.extract_branch.outputs.branch }}
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
     - name: Publish Docker
@@ -27,4 +31,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ajoelpod/mock-json-server
-        tags: ${GITHUB_REF##*/}
+        tags: ${{ steps.extract_branch.outputs.branch }}

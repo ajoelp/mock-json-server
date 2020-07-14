@@ -20,7 +20,7 @@
       "pretty": true,
       "noFallthroughCasesInSwitch": true,
       "allowUnreachableCode": false,
-      "target": "es2016",
+      "target": "ES3",
       "module": "commonjs",
       "moduleResolution": "node",
       "esModuleInterop": true,
