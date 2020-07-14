@@ -24,7 +24,7 @@ export default class Server {
   }
 
   bindMiddleware() {
-    this.app.set("views", path.resolve(__dirname, "./views"));
+    this.app.set("views", path.resolve(__dirname, "../views"));
     this.app.set("view engine", "ejs");
     this.app.use(cors());
     this.app.use((req, res, next) => {
