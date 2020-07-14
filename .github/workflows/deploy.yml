@@ -24,7 +24,7 @@ jobs:
     - name: npm publish
       run: npm publish --tag ${{ steps.extract_branch.outputs.branch }}
       env:
-        NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+        NPM_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
     - name: Publish Docker
       uses: docker/build-push-action@v1
       with:
