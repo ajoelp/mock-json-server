@@ -1,0 +1,36 @@
+{
+  "/home": {
+    "get": {
+      "data": [{ "id": 1, "name": "Steve" }]
+    },
+    "post": {
+      "data": [{ "id": 1, "name": "post Steve French" }]
+    },
+    "patch": {
+      "data": [{ "id": 1, "name": "patch Steve French" }]
+    },
+    "put": {
+      "data": [{ "id": 1, "name": "put Steve French" }]
+    },
+    "delete": {
+      "data": [{ "id": 1, "name": "delete Steve French" }]
+    }
+  },
+  "/test/:id": {
+    "get": {
+      "data": [{ "id": 1, "name": "Steve" }]
+    },
+    "post": {
+      "data": [{ "id": 1, "name": "post Steve French" }]
+    },
+    "patch": {
+      "data": [{ "id": 1, "name": "patch Steve French" }]
+    },
+    "put": {
+      "data": [{ "id": 1, "name": "put Steve French" }]
+    },
+    "delete": {
+      "data": [{ "id": 1, "name": "delete Steve French" }]
+    }
+  }
+}

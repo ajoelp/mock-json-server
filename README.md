@@ -61,7 +61,7 @@ A Post Request to http://localhost:8000/home will return.
 
 ## Docker
 
-Mock json server is also a docker image. Run it with the command 
+Mock json server is also a docker image. Run it with the command
 ```bash
 docker run --name mock-json-server -v $(pwd)/test/data.json:/usr/src/app/data.json -p 8000:8000 ajoelpod/mock-json-server
 ```
@@ -100,7 +100,7 @@ services:
 
 ```js
 const server = require('mock-json-server');
-const app = server({
+const app = server.create(9000, '127.0.0.1', ({
   "/home": {
     "get": {
       "data": [{ "id": 1, "name": "Steve" }]
@@ -117,14 +117,10 @@ const app = server({
       "data": [{ "id": 1, "name": "Steve French" }]
     }
   }
-}, 8000); // Start the server with a JSON object;
-
+}); // Start the server with a JSON object;
 
 // Start the server;
 app.start();
-
-// Reload the server with new data;
-app.reload({ test : true });
 
 // Stop the server
 app.stop();

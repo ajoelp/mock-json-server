@@ -1,0 +1,39 @@
+
+<html>
+    <head>
+        <title>Mock JSON Server</title>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/night-owl.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+            });
+        </script>
+    </head>
+    <body class="bg-gray-200 text-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold my-8">JSON API Service</h2>
+            <div>
+
+                <% Object.entries(routes).forEach(function ([path, data]) { %>
+                <details class="mb-3 bg-white rounded shadow">
+                    <summary class=" py-3 px-4 flex items-center">
+                        <a style="display: inline;" href="http://<%= host %>:<%= port %><%= path %>">http://<%= host %>:<%= port %><%= path %></a>
+                        <div class="ml-auto" style="display: inline;">
+                            <%  Object.entries(data).forEach(function ([method, data]){%>
+                                <span class="inline-block bg-teal-200 text-teal-800 text-xs px-2 rounded-full uppercase font-semibold tracking-wide"><%= method %></span>
+                            <% }); %>
+                        </div>
+                    </summary>
+                    <div class="bg-gray-100">
+                        <pre><code class="p-6 text-sm language-json nightowl block"><%= JSON.stringify(data, null, 2) %></code></pre>
+                    </div>
+                </details>
+                <% }); %>
+            </div>
+        </div>
+    </body>
+</html>
