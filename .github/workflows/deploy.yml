@@ -13,15 +13,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - name: Get tag name
-      id: get_tag_name
-      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
     - name: "Install Deps"
       run: npm ci
     - name: Compile
       run: npm run compile
     - name: npm publish
-      run: npm publish --tag ${{ steps.get_tag_name.outputs.VERSION }}
+      run: npm publish --tag ${GITHUB_REF##*/}
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
     - name: Publish Docker
@@ -30,4 +27,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ajoelpod/mock-json-server
-        tags: ${{ steps.get_tag_name.outputs.VERSION }}
+        tags: ${GITHUB_REF##*/}
