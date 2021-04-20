@@ -9,7 +9,7 @@ const moment = require('moment');
 let server = null;
 let app = null;
 
-const methods = ['get', 'post', 'put', 'delete'];
+const methods = ['get', 'post', 'put', 'delete', 'patch'];
 const isDebug = process.env.DEBUG || false;
 
 const log = data => {
